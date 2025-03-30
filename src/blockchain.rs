@@ -27,7 +27,9 @@ impl Blockchain {
             Some(value) => {
                 block.previous_hash = value.hash.clone();
             },
-            None => print!("nothing")
+            None => {
+                block.previous_hash = "".to_string();
+            }
         }
 
         self.blocks.push(block);
@@ -48,11 +50,6 @@ impl Blockchain {
 
             let current_calculated_hash = current_block.calculate_hash();
 
-            println!("{:#?}", current_block);
-            println!("{:#?}", previous_block);
-            println!("{}", current_calculated_hash);
-
-    
             if current_block.hash != current_calculated_hash
                 || current_block.previous_hash != previous_block.hash
                 || current_block.index != previous_block.index + 1
